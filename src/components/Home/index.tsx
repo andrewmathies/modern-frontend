@@ -1,39 +1,29 @@
-import React, { useEffect } from 'react';
-import { Card, CardContent, Typography } from '@material-ui/core';
+import React, { useEffect } from 'react'
+import { Typography, Paper } from '@material-ui/core'
 
-import { useStoreState, useStoreActions } from '../../hooks';
-import GuestBookEntryForm from '../GuestBookEntryForm';
-import useStyles from './styles';
+import { useStoreState, useStoreActions } from '../../hooks'
+import useStyles from './styles'
 
 const Home: React.FC = () => {
-  const reverseEntries = useStoreState((state) => state.guestbook.reverseEntries);
-  const getEntries = useStoreActions((state) => state.guestbook.getEntries);
-  const classes = useStyles();
+  const player = useStoreState((state) => state.curPlayer.player)
+  const getPlayer = useStoreActions((state) => state.curPlayer.getPlayer)
+  const classes = useStyles()
 
   useEffect(() => {
-    getEntries();
+    getPlayer();
   }, []); // eslint-disable-line
   return (
-    <div>
-      <GuestBookEntryForm />
-      {
-        reverseEntries.map((entry) => (
-          <Card className={classes.entryCard} key={entry.id}>
-            <CardContent>
-              <Typography variant="h2">
-                {entry.name}
-              </Typography>
-              <Typography variant="body1">
-                {entry.content}
-              </Typography>
-              <Typography variant="caption">
-                {entry.submitted}
-              </Typography>
-            </CardContent>
-          </Card>
-        ))
-      }
-    </div>
+    <Paper elevation={0} className={classes.paper}>
+      <Typography variant="h3">
+        {player.tag}
+      </Typography>
+      <Typography>
+        {'Name: ' + player.name}
+      </Typography>
+      <Typography>
+        {'Twitch: ' + player.twitch}
+      </Typography>
+    </Paper>
   );
 };
 

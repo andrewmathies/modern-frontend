@@ -1,5 +1,5 @@
-import GuestBookModel from './GuestBookModel';
+import PlayerModel from './PlayerModel';
 
 export default interface Store {
-  guestbook: GuestBookModel;
+  curPlayer: PlayerModel;
 }

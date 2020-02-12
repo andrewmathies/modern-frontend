@@ -1,10 +1,10 @@
 import { createStore } from 'easy-peasy';
 
 import Store from '../interfaces/Store';
-import GuestBook from './GuestBook';
+import Player from './Player';
 
 const store: Store = {
-  guestbook: GuestBook,
+  curPlayer: Player,
 };
 
 export default createStore<Store>(store);
