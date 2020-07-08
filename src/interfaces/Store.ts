@@ -1,5 +1,5 @@
-import PlayerModel from './PlayerModel';
+import SpecResultsModel from './SpecResultsModel';
 
 export default interface Store {
-  curPlayer: PlayerModel;
+  specResults: SpecResultsModel;
 }

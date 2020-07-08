@@ -1,10 +1,10 @@
 import { createStore } from 'easy-peasy';
 
 import Store from '../interfaces/Store';
-import Player from './Player';
+import SpecResults from './SpecResults';
 
 const store: Store = {
-  curPlayer: Player,
+  specResults: SpecResults,
 };
 
 export default createStore<Store>(store);
