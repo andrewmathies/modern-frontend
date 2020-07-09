@@ -20,14 +20,31 @@ const SpecResults: SpecResultsModel = {
     state.specResults = data
   }),
   getResults: thunk(async (state) => {
-    //const response = await fetch('http://localhost:3005/api/players/3pqcgxg96mk6im6b7i')
-    //const playerData = await response.json()
-    const dummyData = [
+    // TODO: replace with path for real backend
+    const response = await fetch('http://localhost:3005/api/players/3pqcgxg96mk6im6b7i')
+    const resultData = await response.json()
+    state.setResults(resultData)
+  })
+}
+
+export default SpecResults;
+
+/*
+const dummyData = [
       {
         id: 0,
         description: 'turn off bake',
         fullName: 'Check that heating elements aren\'t active after stop cook request is sent',
-        failedExpectations: [],
+        failedExpectations: [
+          {
+            matcherName: 'cookmode',
+            message: 'this is an example message',
+            stack: '_\n_\n_',
+            passed: false,
+            expected: 'cookmode.none',
+            actual: 'cookmode.bake'
+          }
+        ],
         passedExpectations: [],
         deprecationWarnings: [],
         pendingReason: '',
@@ -39,15 +56,29 @@ const SpecResults: SpecResultsModel = {
         description: 'turn on bake',
         fullName: 'Check that the the correct cycle starts when bake 350 cook request is sent',
         failedExpectations: [],
-        passedExpectations: [],
-        deprecationWarnings: [],
+        passedExpectations: [
+          {
+            matcherName: 'cookmode',
+            message: 'way to go!',
+            stack: '------',
+            passed: true,
+            expected: 'cookmode.bake',
+            actual: 'cookmode.bake'
+          }
+        ],
+        deprecationWarnings: [
+          {
+            matcherName: 'cookmode',
+            message: 'deprecation message',
+            stack: '',
+            passed: true,
+            expected: 'cookmode.oldbake',
+            actual: 'cookmode.newbake'
+          }
+        ],
         pendingReason: '',
         status: 'pass',
         duration: 10,
       }
     ]
-    state.setResults(dummyData)
-  })
-}
-
-export default SpecResults;
+*/

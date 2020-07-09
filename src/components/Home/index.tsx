@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
-import { Typography, Paper, CardMedia } from '@material-ui/core'
+import { Typography, Paper } from '@material-ui/core'
 
 import { useStoreState, useStoreActions } from '../../hooks'
-
 import useStyles from './styles'
+import ExpectationUI from '../ExpectationUI'
+import { ExpectationType } from '../ExpectationUI/enums'
 
 const Home: React.FC = () => {
   const results = useStoreState((state) => state.specResults.specResults)
@@ -16,12 +17,24 @@ const Home: React.FC = () => {
   }, []); // eslint-disable-line
 
   let resultComponents = results.map((result) =>
-    <Paper className={classes.paper}>
-      <Typography variant="h3">
-        {'id: ' + result.id }
+    <Paper className={classes.paper} key={result.id}>
+      <Typography variant="h4">
+        {result.description}
       </Typography>
       <Typography>
-        {'name: ' + result.fullName}
+        {'fullname: ' + result.fullName}
+      </Typography>
+      <ExpectationUI expectations={result.failedExpectations} type={ExpectationType.Failed}/>
+      <ExpectationUI expectations={result.passedExpectations} type={ExpectationType.Passed}/>
+      <ExpectationUI expectations={result.deprecationWarnings} type={ExpectationType.Warning}/>
+      <Typography>
+        {'pending reason: ' + result.pendingReason}
+      </Typography>
+      <Typography>
+        {'status: ' + result.status}
+      </Typography>
+      <Typography>
+        {'duration: ' + result.duration}
       </Typography>
     </Paper>
   )

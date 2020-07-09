@@ -3,6 +3,6 @@ export default interface Expectation {
     message: string;
     stack: string;
     passed: boolean;
-    expected: object;
-    actual: object;
+    expected: string;
+    actual: string;
 }

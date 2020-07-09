@@ -13,19 +13,16 @@ import Home from '../Home';
 
 const App: React.FC = () => {
   const classes = useStyles()
-  
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            🍔
-          </IconButton>
           <Button component={Link} to="/" color="inherit">Home</Button>
           <Button component={Link} to="/about" color="inherit">About</Button>
         </Toolbar>
       </AppBar>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/about">
