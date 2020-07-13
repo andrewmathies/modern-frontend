@@ -1,0 +1,23 @@
+first, I need to run the default test and save the output
+
+I'm expecting an array of SpecResults that I can easily save as a json file.
+if that is the case then I can use the json and some npm tool to test the frontend
+
+how to indicate in json whether a test session is for a ticket or for a safety check or for something else. leave extendability open
+
+TestSession {
+    "repo": optional string
+    "issue": optional number
+    "npi": optional string (for safety check)
+    "timestamp": Date
+    "results": Array<Result>
+    "test-link": link to code on github?
+    "plan-link": link to issue being tested on github or to safety check being performed
+}
+
+tests = map[number]TestSession
+
+key = fnv(repo + issue + npi + timestamp)
+
+i think ultimately we want to store our test sessions in a sql database because
+we want to be able to search by different parameters such as by repo + issue or by npi or by time

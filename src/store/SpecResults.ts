@@ -20,10 +20,10 @@ const SpecResults: SpecResultsModel = {
     state.specResults = data
   }),
   getResults: thunk(async (state) => {
-    // TODO: replace with path for real backend
-    const response = await fetch('http://localhost:3005/api/players/3pqcgxg96mk6im6b7i')
-    const resultData = await response.json()
-    state.setResults(resultData)
+    const response = await fetch('http://13.59.18.128:3000/api/result')
+    const testSessions = await response.json()
+    console.log(testSessions)
+    state.setResults(Object.values(testSessions))
   })
 }
 
