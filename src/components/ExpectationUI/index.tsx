@@ -1,9 +1,5 @@
 import React from 'react'
-
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import { Typography } from '@material-ui/core'
+import { Typography, Table, TableBody, TableHead, TableRow, TableCell } from '@material-ui/core'
 
 import useStyles from './styles'
 import Expectation from '../../interfaces/Expectation'
@@ -21,14 +17,14 @@ const ExpectationUI: React.FC<{ expectations: Expectation[], type: ExpectationTy
     const type = params.type
 
     let expectationItems = expectations.map((expectation) =>
-        <ListItem>
-            <ListItemText primary={'matcherName: ' + expectation.matcherName} />
-            <ListItemText primary={'message: ' + expectation.message} />
-            <ListItemText primary={'stack: ' + expectation.stack} />
-            <ListItemText primary={'passed: ' + expectation.passed} />
-            <ListItemText primary={'expected: ' + expectation.expected} />
-            <ListItemText primary={'actual: ' + expectation.actual} />
-        </ListItem>
+        <TableRow key={expectation.matcherName}>
+            <TableCell className={classes.headerCell}>{expectation.matcherName}</TableCell>
+            <TableCell>{expectation.message}</TableCell>
+            <TableCell>{expectation.stack}</TableCell>
+            <TableCell>{expectation.passed}</TableCell>
+            <TableCell>{expectation.expected}</TableCell>
+            <TableCell>{expectation.actual}</TableCell>
+        </TableRow>
     )
 
     let typeDescriptor = ''
@@ -50,7 +46,21 @@ const ExpectationUI: React.FC<{ expectations: Expectation[], type: ExpectationTy
 
     return <div>
             <Typography variant='h5'>{typeDescriptor}</Typography>
-            <List component='nav' className={classes.list} children={expectationItems} />
+            <Table className={classes.table}>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>MatcherName</TableCell>
+                        <TableCell>Message</TableCell>
+                        <TableCell>Stack</TableCell>
+                        <TableCell>Passed</TableCell>
+                        <TableCell>Expected</TableCell>
+                        <TableCell>Actual</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {expectationItems}
+                </TableBody>
+            </Table>
         </div>
 }
 
